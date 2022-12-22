@@ -2,25 +2,20 @@
 var generateBtn = document.querySelector("#generate");
 
 // var characters = "abcdefghijklmnopqrstuvwxyz";
-var upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-var lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var upperCase = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+var lowerCase = ["a","b","c","d","e","f","g", "h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 var number = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-var special = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "~"];
-var charArray = [];
+var special = ["!","@","#","$","%","^","&","*","(",")","_","+","~","/","?","`","-",":",";","<",">"];
+var charArray = "";
 
-
-//Generat Password
+//Generate Password
 
 function generatePassword() {
-  var choice = prompt(
-    "How many characters would like your password to contain?"
-  );
+  var choice = prompt("How many characters would like your password to contain?");
   console.log(choice);
 
   if (choice < 8 || choice >= 128) {
-    choice = prompt(
-      "Choose a length of at least 8 characters and no more than 128 characters"
-    );
+   alert("Choose a length of at least 8 characters and no more than 128 characters");
     return;
   } else {
     var specialCharacter = confirm(
@@ -29,7 +24,7 @@ function generatePassword() {
     console.log(specialCharacter);
 
     if (specialCharacter) {
-      charArray.push(special);
+      charArray += special.join("");
     }
     var numericCharacter = confirm(
       "Click OK to confirm including numerical characters"
@@ -37,7 +32,7 @@ function generatePassword() {
     console.log(numericCharacter);
 
     if (numericCharacter) {
-      charArray.push(number);
+      charArray += number.join("");
     }
     var lowerCaseCharacter = confirm(
       "Click OK to confirm including lowercase characters"
@@ -45,7 +40,7 @@ function generatePassword() {
     console.log(lowerCaseCharacter);
 
     if (lowerCaseCharacter) {
-      charArray.push(lowerCase);
+      charArray += lowerCase.join("");
     }
     var upperCaseCharacter = confirm(
       "Click OK to confirm including uppercase character"
@@ -53,16 +48,20 @@ function generatePassword() {
     console.log(upperCaseCharacter);
 
     if (upperCaseCharacter) {
-      charArray.push(upperCase);
+      charArray += upperCase.join("");
     }
+    if (charArray === "") {
+      alert("Must pick at least one character type to generate password.");
+      generatePassword();
+    }
+    
   }
 
-  var finalPassword ="";
-  for(var i = 0; i >= length; i++) {
-   finalPassword=charArray(Math.floor(Math.random()* choice.length))
-       }
-       return finalPassword;
-}
+  var finalPassword = "";
+  for (var i = 0; i < choice; i++) {
+    finalPassword += charArray[Math.floor(Math.random() * charArray.length)];
+  }
+  return finalPassword;
 }
 
 // Write password to the #password input
