@@ -8,10 +8,18 @@ var randomFunc = {
   number: getRandomNumber,
   symbol: getRandomSymbol,
 };
-var selection = [];
+var selection = "";
 
 //Generate Functions
 
+function generateCharacter(length) {
+  var result = "";
+  var characterslength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characterslength));
+  }
+  return result;
+}
 function getRandomLower() {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
 }
@@ -26,13 +34,15 @@ function getRandomSymbol() {
   return symbols[Math.floor(Math.random() * symbols.length)];
 }
 
+//Generat Password
+
 function generatePassword() {
   var choice = prompt(
     "How many characters would like your password to contain?"
   );
   console.log(choice);
 
-  if (choice < 8 || choice > 128) {
+  if (choice < 8 || choice >= 128) {
     choice = prompt(
       "Choose a length of at least 8 characters and no more than 128 characters"
     );
@@ -40,15 +50,19 @@ function generatePassword() {
     var specialCharacter = confirm(
       "click OK to confirm including special characters"
     );
+    console.log(specialCharacter);
     var numericCharacter = confirm(
       "Click OK to confirm including numerical characters"
     );
+    console.log(numericCharacter);
     var lowerCaseCharacter = confirm(
       "Click OK to confirm including lowercase characters"
     );
+    console.log(lowerCaseCharacter);
     var upperCaseCharacter = confirm(
       "Click OK to confirm including uppercase character"
     );
+    console.log(upperCaseCharacter);
 
     if (
       !specialCharacter &&
@@ -56,7 +70,7 @@ function generatePassword() {
       !lowerCaseCharacter &&
       !upperCaseCharacter
     ) {
-      return;
+      console.log(generateCharacter(choice));
     } else if (
       specialCharacter &&
       numericCharacter &&
@@ -75,7 +89,6 @@ function generatePassword() {
         getRandomSymbol,
         getRandomUpper
       );
-
       //three options were selected
     } else if (
       !specialCharacter &&
@@ -118,8 +131,3 @@ function writePassword() {
 
 var generateBtn = document.getElementById("generate");
 generateBtn.addEventListener("click", writePassword, true);
-
-// function writePassword() {
-//   // var choice = prompt("How many characters would like your password to contain?");
-//   // console.log(choice);
-// }
