@@ -1,49 +1,13 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-var characters = "abcdefghijklmnopqrstuvwxyz";
-var randomFunc = {
-  lower: getRandomLower,
-  upper: getRandomUpper,
-  number: getRandomNumber,
-  symbol: getRandomSymbol,
-};
-var selection;
+// var characters = "abcdefghijklmnopqrstuvwxyz";
+var upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+var lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var number = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+var special = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "~"];
 var charArray = [];
 
-//Generate Functions
-
- function generateSpecialCharacter(length, arrayChar)
-  var result = "";
-    var characterslength = characters.length;
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * characterslength));
-    }
-    return result;
-  }
-
-
-function generateCharacter(length) {
-  var result = "";
-  var characterslength = characters.length;
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * characterslength));
-  }
-  return result;
-}
-function getRandomLower() {
-  return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
-}
-function getRandomUpper() {
-  return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
-}
-function getRandomNumber() {
-  return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
-}
-function getRandomSymbol() {
-  var symbols = "!@#$%^&*(){}[]=<>/,.";
-  return symbols[Math.floor(Math.random() * symbols.length)];
-}
 
 //Generat Password
 
@@ -57,84 +21,48 @@ function generatePassword() {
     choice = prompt(
       "Choose a length of at least 8 characters and no more than 128 characters"
     );
+    return;
   } else {
     var specialCharacter = confirm(
       "click OK to confirm including special characters"
     );
     console.log(specialCharacter);
+
+    if (specialCharacter) {
+      charArray.push(special);
+    }
     var numericCharacter = confirm(
       "Click OK to confirm including numerical characters"
     );
     console.log(numericCharacter);
+
+    if (numericCharacter) {
+      charArray.push(number);
+    }
     var lowerCaseCharacter = confirm(
       "Click OK to confirm including lowercase characters"
     );
     console.log(lowerCaseCharacter);
+
+    if (lowerCaseCharacter) {
+      charArray.push(lowerCase);
+    }
     var upperCaseCharacter = confirm(
       "Click OK to confirm including uppercase character"
     );
     console.log(upperCaseCharacter);
 
-    if (
-      !specialCharacter &&
-      !numericCharacter &&
-      !lowerCaseCharacter &&
-      !upperCaseCharacter
-    ) {
-      selection = generateCharacter(choice);
-
-      return selection;
-
-      // console.log(generateCharacter(choice));
-    } else if (
-      specialCharacter &&
-      numericCharacter &&
-      lowerCaseCharacter &&
-      upperCaseCharacter
-    ) {
-      // selection = selection.concat(
-      //   getRandomLower,
-      //   getRandomNumber,
-      //   getRandomSymbol,
-      //   getRandomUpper
-      // );
-      charArray.push(
-        getRandomLower,
-        getRandomNumber,
-        getRandomSymbol,
-        getRandomUpper
-      );
-      selection = generateSpecialCharacter(choice, charArray);
-
-      return selection;
-      //three options were selected
-    } else if (
-      !specialCharacter &&
-      numericCharacter &&
-      lowerCaseCharacter &&
-      upperCaseCharacter
-    ) {
-      //two options were selected
-    } else if (
-      !specialCharacter &&
-      !numericCharacter &&
-      lowerCaseCharacter &&
-      upperCaseCharacter
-    ) {
-      //one options is selected
-    } else if (
-      !specialCharacter &&
-      !numericCharacter &&
-      !lowerCaseCharacter &&
-      upperCaseCharacter
-    ) {
-    } else if (specialCharacter) {
-      selection = specialCharacter;
-    } else if (numericCharacter) {
-    } else if (lowerCaseCharacter) {
-    } else if (upperCaseCharacter) {
+    if (upperCaseCharacter) {
+      charArray.push(upperCase);
     }
   }
+
+  var finalPassword ="";
+  for(var i = 0; i >= length; i++) {
+   finalPassword=charArray(Math.floor(Math.random()* choice.length))
+       }
+       return finalPassword;
+}
 }
 
 // Write password to the #password input
