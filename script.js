@@ -8,9 +8,20 @@ var randomFunc = {
   number: getRandomNumber,
   symbol: getRandomSymbol,
 };
-var selection = "";
+var selection;
+var charArray = [];
 
 //Generate Functions
+
+ function generateSpecialCharacter(length, arrayChar)
+  var result = "";
+    var characterslength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characterslength));
+    }
+    return result;
+  }
+
 
 function generateCharacter(length) {
   var result = "";
@@ -70,25 +81,32 @@ function generatePassword() {
       !lowerCaseCharacter &&
       !upperCaseCharacter
     ) {
-      console.log(generateCharacter(choice));
+      selection = generateCharacter(choice);
+
+      return selection;
+
+      // console.log(generateCharacter(choice));
     } else if (
       specialCharacter &&
       numericCharacter &&
       lowerCaseCharacter &&
       upperCaseCharacter
     ) {
-      selection = selection.concat(
+      // selection = selection.concat(
+      //   getRandomLower,
+      //   getRandomNumber,
+      //   getRandomSymbol,
+      //   getRandomUpper
+      // );
+      charArray.push(
         getRandomLower,
         getRandomNumber,
         getRandomSymbol,
         getRandomUpper
       );
-      selection.push(
-        getRandomLower,
-        getRandomNumber,
-        getRandomSymbol,
-        getRandomUpper
-      );
+      selection = generateSpecialCharacter(choice, charArray);
+
+      return selection;
       //three options were selected
     } else if (
       !specialCharacter &&
